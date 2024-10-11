@@ -1,0 +1,37 @@
+Function MinSwapsToConnect(row):
+    0n = length(row) / 2
+    swaps = 0
+    positions = new array of size 2n
+
+    // Store the positions of each person
+    for i = 0 to 2n - 1:
+        positions[row[i]] = i
+
+    // Iterate through each couple
+    for i = 0 to n - 1:
+        person1 = 2 * i
+        person2 = 2 * i + 1
+
+        // If the couple is not adjacent
+        if abs(positions[person1] - positions[person2]) > 1:
+            // Find the person to swap with
+            if positions[person1] % 2 == 0:
+                swapWith = row[positions[person1] + 1]
+            else:
+                swapWith = row[positions[person1] - 1]
+
+            // Perform the swap
+            Swap(row[positions[person1]], row[positions[swapWith]])
+            
+            // Update positions
+            positions[row[positions[person1]]] = positions[person1]
+            positions[row[positions[swapWith]]] = positions[swapWith]
+
+            swaps = swaps + 1
+
+    return swaps
+
+Function Swap(a, b):
+    temp = a
+    a = b
+    b = temp
