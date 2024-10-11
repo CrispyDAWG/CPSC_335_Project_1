@@ -1,37 +1,39 @@
-Function MinSwapsToConnect(row):
-    0n = length(row) / 2
+Function MinimumSwapsToConnect(row):
+    n = length(row) / 2
     swaps = 0
-    positions = new array of size 2n
+    positions = new array of size 2n  // O(2n) for array creation
 
     // Store the positions of each person
-    for i = 0 to 2n - 1:
-        positions[row[i]] = i
+    for i = 0 to 2n - 1:  // O(2n) for the loop
+        positions[row[i]] = i  // O(1) for each assignment
 
     // Iterate through each couple
-    for i = 0 to n - 1:
+    for i = 0 to n - 1:  // O(n) for the loop
         person1 = 2 * i
         person2 = 2 * i + 1
 
         // If the couple is not adjacent
-        if abs(positions[person1] - positions[person2]) > 1:
+        if abs(positions[person1] - positions[person2]) > 1:  // O(1) for comparison
             // Find the person to swap with
-            if positions[person1] % 2 == 0:
+            if positions[person1] % 2 == 0:  // O(1) for condition check
                 swapWith = row[positions[person1] + 1]
             else:
                 swapWith = row[positions[person1] - 1]
 
             // Perform the swap
-            Swap(row[positions[person1]], row[positions[swapWith]])
+            Swap(row[positions[person1]], row[positions[swapWith]])  // O(1) for swap operation
             
             // Update positions
-            positions[row[positions[person1]]] = positions[person1]
-            positions[row[positions[swapWith]]] = positions[swapWith]
+            positions[row[positions[person1]]] = positions[person1]  // O(1) for assignment
+            positions[row[positions[swapWith]]] = positions[swapWith]  // O(1) for assignment
 
-            swaps = swaps + 1
+            swaps = swaps + 1  // O(1) for increment
 
     return swaps
 
-Function Swap(a, b):
+Function Swap(a, b):  // O(1) for the entire swap operation
     temp = a
     a = b
     b = temp
+
+// Overall time complexity: O(2n) + O(2n) + O(n) * O(1) = O(n)
