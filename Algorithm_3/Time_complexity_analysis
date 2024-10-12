@@ -82,6 +82,8 @@ def convert_min_to_clock(minutes): # O(N) time complexity
     return converted_times
 # 6 steps
 
+
+##########################################################################################################
 # 10n1 + 10n2 + m^2 + 2m + 2m + 1 + 2x + n1 + n2 +6a
 
 # 2(n1 + n2) + m^2 + 4m + 2x + 6a + 1
@@ -92,6 +94,8 @@ def convert_min_to_clock(minutes): # O(N) time complexity
 
 # **** Time Complexity is O(N^2) ***** 
 # mainly due to using insertion sort 
+
+##########################################################################################################
 
 
 def main():
