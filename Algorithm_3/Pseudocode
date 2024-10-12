@@ -1,1 +1,91 @@
-HI :)
+func clock_to_min(time)
+    split time by ':'
+    convert hours and minutes to integers
+    return hours * 60 + minutes  (Convert the time to minutes since midnight)
+
+func convert_schedule_to_minutes(schedule)
+    create an empty list called converted
+    for each time in schedule
+        get start and end times
+        convert start and end times to minutes using clock_to_min
+        add [start, end] to the converted list
+    return converted
+
+func ins_sort(intervals)
+    for each interval starting from the second element
+         key = the current interval
+        initialize j as the index of the previous element
+        while j is valid and intervals[j][0] > key[0]
+            shift intervals[j] to intervals[j + 1]  sort based on start time
+             j--
+        insert key into its correct position in the sorted part
+    return intervals 
+
+func merge_intervals(intervals)
+    if intervals list is empty, RETURN empty list
+    sort intervals using ins_sort
+    create merged list with the first interval
+    for each current interval starting from the second element in sorted intervals
+        last = the last interval in merged list
+        if current interval overlaps with last interval
+            update the end time of last interval to be the maximum of the two intervals' end times
+        else
+            add current interval to merged list
+    return merged
+
+func find_available_intervals(busy_intervals, start, end)
+    create available_intervals as an empty list
+     prev_end = start  (This tracks the end of the previous busy period or the start of the day)
+
+    for each [start_time, end_time] in busy_intervals:
+        if start_time is greater than prev_end:  There is a gap
+            add [prev_end, start_time] to available_intervals  // Add the gap as an available time
+        prev_end = the maximum of prev_end and end_time  
+    if prev_end is less than end:  
+        add [prev_end, end] to available_intervals 
+    return available_intervals
+
+
+func duration_compliant(times, duration)
+    creaete filtered_times as an empty list
+    for each time interval in times
+        if the duration of the time interval is greater than or equal to the required duration
+            add the interval to filtered_times
+    return filtered_times
+
+Ffunc merge_schedules(schedule1, schedule2)
+    return  schedule1 + schedule2
+
+func min_to_clock(minutes)
+    calc hours and minutes from total minutes
+    return the time in "HH:MM" format
+
+func convert_min_to_clock(minutes)
+    create converted_times as an empty list
+    for each minute interval in minutes
+        convert start and end times to clock format using min_to_clock
+        add the converted interval to converted_times
+    return converted_times
+
+func main
+    define all variables: person1, person2, schedules etc...
+
+    convert both person1's and person2's schedules to minutes using convert_schedule_to_minutes
+
+    convert daily active times to minutes using clock_to_min
+
+    merge person1's and person2's schedules into busy_intervals using merge_schedules
+
+    merge overlapping intervals in busy_intervals using merge_intervals
+
+    find common start and end time by taking the maximum of start times and minimum of end times
+
+    find available times between busy periods using find_available_intervals
+
+    check available intervals to see that they meet the duration requirement using duration_compliant
+
+    convert available times back to clock format using convert_min_to_clock
+
+    print available meeting times
+
+
