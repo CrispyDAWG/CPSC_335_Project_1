@@ -77,7 +77,7 @@
   Fuel is not enough at the beginning: In cities near the start of the list, fuel may be insufficient to complete the trip, forcing the algorithm to shift the starting city multiple times.
   Best starting city is at the end of the list: This means we need to iterate all cities a couple times, reset the tank and adjust the city, then we find the best starting city.
 
-6. Space time complexity( O(1) ):
+6. Space complexity( O(1) ):
   The input variables take O(n) space, but since they are part of the input and not extra storage, they don't count towards the additional space complexity of the algorithm.
   Two loops modify and use the existing variables, it takes O(1) space.
 
