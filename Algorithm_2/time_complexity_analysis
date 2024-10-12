@@ -1,0 +1,86 @@
+time complexity analysis: 
+
+1. initialization:
+  n = 5	// 5 cities, takes O(1) time to assign the length of list
+  tank = 0	// current fuel in tank, O(1)
+  total_fuel_surplus = 0	// total fuel surplus, O(1)
+  start_city = 0	// starting city index, O(1)
+
+2. first loop to calculate the fuel surplus:
+  // need to make sure the fuel gained at each city is enough to travel to the next city
+
+  City 0:
+    Fuel gained = fuel[0] * mpg = 1 * 10 = 10
+    Fuel needed = city_distances[0] = 5
+    Fuel surplus = 10 - 5 = 5
+    Update total_fuel_surplus = 0 + 5 = 5
+  City 1:
+    Fuel gained = fuel[1] * mpg = 2 * 10 = 20
+    Fuel needed = city_distances[1] = 25
+    Fuel surplus = 20 - 25 = -5
+    Update total_fuel_surplus = 5 - 5 = 0
+  City 2:
+    Fuel gained = fuel[2] * mpg = 1 * 10 = 10
+    Fuel needed = city_distances[2] = 15
+    Fuel surplus = 10 - 15 = -5
+    Update total_fuel_surplus = 0 - 5 = -5
+  City 3:
+    Fuel gained = fuel[3] * mpg = 0 * 10 = 0
+    Fuel needed = city_distances[3] = 10
+    Fuel surplus = 0 - 10 = -10
+    Update total_fuel_surplus = -5 - 10 = -15
+  City 4:
+    Fuel gained = fuel[4] * mpg = 3 * 10 = 30
+    Fuel needed = city_distances[4] = 15
+    Fuel surplus = 30 - 15 = 15
+    Update total_fuel_surplus = -15 + 15 = 0
+
+  total fuel surplus = 5 - 5 - 5 - 10 + 15 = 0
+  Since the total fuel surplus is not negative, it means the trip is feasible, so the program will continue and not return -1.
+
+3. Conditional check for total fuel surplus: O(1)
+
+4. Second loop to find the preferred starting point:
+  // need to find the best starting city, and make sure the fuel in the tank is enough to travel to the next city starting from each city.
+  
+  City 0:
+    Fuel gained = fuel[0] * mpg = 10
+    Fuel needed = city_distances[0] = 5
+    Tank status = tank = 0 + 10 - 5 = 5 > 0 => no need to adjust the city and reset the tank
+    
+  City 1:
+    Fuel gained = fuel[1] * mpg = 20
+    Fuel needed = city_distances[1] = 25
+    Tank status = tank = 5 + 20 - 25 = 0 => no need to adjust the city and reset the tank
+    
+  City 2:
+    Fuel gained = fuel[2] * mpg = 10
+    Fuel needed = city_distances[2] = 15
+    Tank status = tank = 0 + 10 - 15 = -5 < 0 => start_city = 2 + 1 = 3 and reset tank = 0.
+
+  City 3:
+    Fuel gained = fuel[3] * mpg = 0
+    Fuel needed = city_distances[3] = 10
+    Tank status = tank = 0 + 0 - 10 = -10 < 0 => start_city = 3 + 1 = 4 and reset tank = 0.
+
+  City 4:
+    Fuel gained = fuel[4] * mpg = 30
+    Fuel needed = city_distances[4] = 15
+    Tank status = tank = 0 + 30 - 15 = 15 > 0 => no need to adjust the city and reset the tank
+
+  Initially, tank = 0, start_city = 0. Calculate the fuel level in the tank after traveling from each city. After calculation, we found the city 4 is the best choice that can allow the vehicle to complete the journey without running out of fuel.
+  The loop runs n times, same operation as the first loop, so the calculation takes O(1) time.
+  The conditional check is evaluated n times, each taking O(1) time. Updates the starting index and reset tank, both of them take O(1) time.
+  So, the loop takes O(n) + O(1) = O(n) time.
+
+5. Worst-case scenario:
+  Fuel is not enough at the beginning: In cities near the start of the list, fuel may be insufficient to complete the trip, forcing the algorithm to shift the starting city multiple times.
+  Best starting city is at the end of the list: This means we need to iterate all cities a couple times, reset the tank and adjust the city, then we find the best starting city.
+
+6. Space time complexity( O(1) ):
+  The input variables take O(n) space, but since they are part of the input and not extra storage, they don't count towards the additional space complexity of the algorithm.
+  Two loops modify and use the existing variables, it takes O(1) space.
+7. Total time complexity:
+  O(1) + O(n) + O(1) + O(n) = O(n)
+
+    
