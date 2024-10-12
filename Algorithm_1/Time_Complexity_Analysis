@@ -1,16 +1,14 @@
-// Time Complexity: O(n), where n is the size of the input array
-// Space Complexity: O(n) due to the positions array
 int minSwapsCouples(int row[], int size) {
-    int swaps = 0;
-    int positions[100];  // O(1) space, assuming max size is known and fixed
+    int swaps = 0;  // O(1)
+    int positions[30];  // O(1), fixed-size array
 
-    // O(n) time
+    // O(n) time complexity
     for (int i = 0; i < size; ++i) {
         positions[row[i]] = i;  // O(1) per iteration
     }
 
-    // O(n) time overall, as each element is touched at most twice
-    for (int i = 0; i < size; i += 2) {  // Iterates n/2 times
+    // O(n) time complexity overall
+    for (int i = 0; i < size; i += 2) {  // Runs n/2 times
         int person1 = row[i];  // O(1)
         int person2 = row[i + 1];  // O(1)
 
@@ -33,19 +31,10 @@ int minSwapsCouples(int row[], int size) {
         }
     }
 
-    // O(n) time for printing (if needed)
-    cout << "Rearranged Row: ";
-    for (int i = 0; i < size; ++i) {
-        cout << row[i] << " ";  // O(1) per iteration
-    }
-    cout << endl;  // O(1)
-
     return swaps;  // O(1)
 }
 
-/*
 Revised Time Complexity Analysis:
-
 1. Initialization of positions array: O(n)
    - This step creates a lookup table for constant-time access to each person's position.
 
@@ -66,18 +55,14 @@ Revised Time Complexity Analysis:
    - Even in the worst case, each element is moved at most once.
    - This means the total number of swaps is at most n/2.
 
-5. Printing the rearranged row: O(n)
-   - This step is optional and doesn't affect the core algorithm's complexity.
-
 Overall Time Complexity: O(n)
 - The algorithm maintains linear time complexity even in the worst case.
-- It's more efficient than initially thought, as each swap optimally positions two elements.
+- It's efficient as each swap optimally positions two elements.
 
-Space Complexity: O(n)
-- The positions array uses O(n) extra space.
-- This trade-off in space allows for O(1) lookups, crucial for the algorithm's efficiency.
+Space Complexity: O(1)
+- The positions array uses O(1) extra space (fixed size of 30).
+- This allows for O(1) lookups, crucial for the algorithm's efficiency.
 
 Optimality:
 - This algorithm achieves the minimum possible number of swaps.
 - It's optimal in both time and result, as it directly moves each element to its final position in at most one swap.
-*/
