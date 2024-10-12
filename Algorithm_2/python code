@@ -10,7 +10,7 @@ def findPreferredCity(city_distances, fuel, mpg):
         fuel_cost = city_distances[i]  # fuel needed to reach the next city
         total_fuel_surplus += fuel_gain - fuel_cost  # update total fuel surplus
     
-    # If total fuel surplus is negative, return -1 (not possible to complete the trip)
+    # If total fuel surplus is negative, it's impossible to complete the trip
     if total_fuel_surplus < 0:
         return -1
     
@@ -29,10 +29,9 @@ def findPreferredCity(city_distances, fuel, mpg):
     return start_city
 
 # Sample input
-city_distances = [5, 25, 15, 10, 15]  # distances between cities
-fuel = [1, 2, 1, 0, 3]  # fuel available at each city
-mpg = 10  # miles per gallon
+city_distances = [5, 25, 15, 10, 15]
+fuel = [1, 2, 1, 0, 3]
+mpg = 10
 
-# Call the function
 result = findPreferredCity(city_distances, fuel, mpg)
 print("The preferred starting city is:", result)
