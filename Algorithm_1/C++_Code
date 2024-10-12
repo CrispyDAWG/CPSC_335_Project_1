@@ -18,7 +18,7 @@ using namespace std;
 // ============================================================================
 int minSwapsCouples(int row[], int size) {
     int swaps = 0;
-    int positions[100];  // Array to store the positions of each person (adjust size if necessary)
+    int positions[30];  // Store  positions of each person (max row size = 30)
 
     // Display the original row arrangement
     cout << "Original Row: ";
