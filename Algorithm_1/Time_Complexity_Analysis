@@ -1,0 +1,83 @@
+// Time Complexity: O(n), where n is the size of the input array
+// Space Complexity: O(n) due to the positions array
+int minSwapsCouples(int row[], int size) {
+    int swaps = 0;
+    int positions[100];  // O(1) space, assuming max size is known and fixed
+
+    // O(n) time
+    for (int i = 0; i < size; ++i) {
+        positions[row[i]] = i;  // O(1) per iteration
+    }
+
+    // O(n) time overall, as each element is touched at most twice
+    for (int i = 0; i < size; i += 2) {  // Iterates n/2 times
+        int person1 = row[i];  // O(1)
+        int person2 = row[i + 1];  // O(1)
+
+        // O(1) operation
+        int partner = (person1 % 2 == 0) ? person1 + 1 : person1 - 1;
+
+        // O(1) comparison
+        if (person2 != partner) {
+            // O(1) lookup
+            int partnerIndex = positions[partner];
+
+            // O(1) swap operation
+            swap(row[i + 1], row[partnerIndex]);
+
+            // O(1) updates
+            positions[row[i + 1]] = i + 1;
+            positions[row[partnerIndex]] = partnerIndex;
+
+            swaps++;  // O(1)
+        }
+    }
+
+    // O(n) time for printing (if needed)
+    cout << "Rearranged Row: ";
+    for (int i = 0; i < size; ++i) {
+        cout << row[i] << " ";  // O(1) per iteration
+    }
+    cout << endl;  // O(1)
+
+    return swaps;  // O(1)
+}
+
+/*
+Revised Time Complexity Analysis:
+
+1. Initialization of positions array: O(n)
+   - This step creates a lookup table for constant-time access to each person's position.
+
+2. Main loop: O(n)
+   - The loop runs n/2 times (once for each couple).
+   - Each iteration performs constant time operations:
+     a. Identifying the correct partner: O(1)
+     b. Checking if a swap is needed: O(1)
+     c. Performing the swap if necessary: O(1)
+     d. Updating positions: O(1)
+
+3. The key efficiency comes from:
+   a. Constant-time lookups using the positions array.
+   b. Each swap correctly positions two elements.
+   c. Elements already in correct positions are not moved.
+
+4. Worst-case scenario:
+   - Even in the worst case, each element is moved at most once.
+   - This means the total number of swaps is at most n/2.
+
+5. Printing the rearranged row: O(n)
+   - This step is optional and doesn't affect the core algorithm's complexity.
+
+Overall Time Complexity: O(n)
+- The algorithm maintains linear time complexity even in the worst case.
+- It's more efficient than initially thought, as each swap optimally positions two elements.
+
+Space Complexity: O(n)
+- The positions array uses O(n) extra space.
+- This trade-off in space allows for O(1) lookups, crucial for the algorithm's efficiency.
+
+Optimality:
+- This algorithm achieves the minimum possible number of swaps.
+- It's optimal in both time and result, as it directly moves each element to its final position in at most one swap.
+*/
