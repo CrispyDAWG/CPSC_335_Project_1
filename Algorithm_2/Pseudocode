@@ -1,29 +1,27 @@
-def findPreferredCity(city_distances, fuel, mpg):
-    n = len(city_distances)  # the total number of cities
-    tank = 0  # current fuel in tank
-    total_fuel_surplus = 0  # total fuel surplus (to check if a solution is possible)
-    start_city = 0  # starting city index
-    
-    # Iterate through all cities and calculate the fuel surplus
-    for i in range(n):
-        fuel_gain = fuel[i] * mpg  # fuel gained at the current city
-        fuel_cost = city_distances[i]  # fuel needed to get to the next city
-        total_fuel_surplus += fuel_gain - fuel_cost  # update the total fuel surplus
-        
-    # If total fuel is less than the total cost, it’s impossible to complete the circuit
-    if total_fuel_surplus < 0:
-        return -1
-    
-    # Now find the best starting city
-    tank = 0  # reset the tank to 0 for a fresh start
-    for i in range(n):
-        fuel_gain = fuel[i] * mpg  # fuel gained at the current city
-        fuel_cost = city_distances[i]  # fuel needed to get to the next city
-        tank += fuel_gain - fuel_cost  # update the current fuel in tank
-        
-        # If the current fuel is not enough to reach the next city
-        if tank < 0:
-            start_city = i + 1  # move the starting point to the next city
-            tank = 0  # reset the tank
-    
-    return start_city
+Function findPreferredCity(city_distances, fuel, mpg):
+	n = length(city_distances)   // the total number of cities
+		tank = 0                  // current fuel in tank
+		total_fuel_surplus = 0                      // fuel surplus
+		start_city = 0                      // start city
+	
+	//  iterate through all cities and calculate the fuel surplus
+	for i = 0 to n-1:
+		fuel_gain = fuel[i] * mpg   // fuel gained at the current city
+		fuel_cost = city_distances[i]   // the fuel needed for arriving next city
+		total_fuel_surplus = fule_gain - fuel_cost   // update the fuel surplus
+
+	// if total fuel is less than the total cost, it’s impossible to complete the circuit
+	if total_fuel_surplus < 0
+		return -1
+	
+	// find the best starting city
+	for i from 0 to n-1:
+		fuel_gain = fuel[i] * mpg    // fuel gained at the current city
+		fuel_cost = city_distances[i]   // the fuel needed for arriving next city
+		total_fuel_surplus = fule_gain - fuel_cost   // update the fuel surplus
+		
+		// if the current fuel is not enough for reaching the next city
+		if tank < 0:
+			start_city = i + 1   // the next city is becoming the starting point
+			tank = 0   // reset the current fuel
+	return start_city
