@@ -13,19 +13,21 @@ using namespace std;
 //   - Modifies the input array 'row' to reflect the new arrangement
 //   - Prints the original and rearranged row to the console
 // Assumptions:
-//   - Each person is represented by a number from 0 to size-1
-//   - Couples are pairs (0,1), (2,3), (4,5), etc.
+//   - Each person is represented by a number from 0 to size - 1
+//   - Couples are pairs (0,1), (2,3), (4,5), (7, 6) etc. 
 // ============================================================================
 int minSwapsCouples(int row[], int size) {
     int swaps = 0;
     int positions[30];  // Store  positions of each person (max row size = 30)
 
+    /* Code used for testing
     // Display the original row arrangement
     cout << "Original Row: ";
     for (int i = 0; i < size; ++i) {
         cout << row[i] << " ";
     }
     cout << endl;
+    */
     
     // Store the positions of each person
     for (int i = 0; i < size; ++i) {
@@ -57,12 +59,14 @@ int minSwapsCouples(int row[], int size) {
         }
     }
 
+    /* Code used for testing
     // Display the new row arrangement
     cout << "Rearranged Row: ";
     for (int i = 0; i < size; ++i) {
         cout << row[i] << " ";
     }
     cout << endl;
+    */
 
     return swaps;
 }
@@ -72,10 +76,10 @@ int minSwapsCouples(int row[], int size) {
 //              test cases.
 // Input: None 
 // Output: 
-//   - Prints the results of each test case, including:
-//     * Original arrangement
-//     * Rearranged row
-//     * Number of swaps performed
+//   - Prints the results of each test run of minSwapsCouples, including:
+//     * Original arrangement (if uncommented)
+//     * Rearranged row (if uncommented)
+//     * Min Number of swaps performed
 //   - Exits upon successful execution
 // ============================================================================
 int main() {
