@@ -1,4 +1,4 @@
-time complexity analysis: 
+// time complexity analysis: 
 
 1. initialization:
   n = 5	// 5 cities, takes O(1) time to assign the length of list
@@ -80,6 +80,7 @@ time complexity analysis:
 6. Space time complexity( O(1) ):
   The input variables take O(n) space, but since they are part of the input and not extra storage, they don't count towards the additional space complexity of the algorithm.
   Two loops modify and use the existing variables, it takes O(1) space.
+
 7. Total time complexity:
   O(1) + O(n) + O(1) + O(n) = O(n)
 
