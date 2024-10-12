@@ -1,39 +1,38 @@
 FUNCTION minSwapsCouples(row, size)
-    // Initialize variables
-    swaps ← 0
-    positions ← new Array[size]  // Array to store positions of each person
+    swaps = 0         // stores # of swaps
+    positions = new Array[size]  // Array to store positions of each person (max size 30)
 
     // Store the position of each person
     FOR i FROM 0 TO size - 1
-        positions[row[i]] ← i
+        positions[row[i]] = i
     END FOR
 
     // Process each pair
     FOR i FROM 0 TO size - 1 STEP 2
-        person1 ← row[i]
-        person2 ← row[i + 1]
+        person1 = row[i]
+        person2 = row[i + 1]
         
         // Determine the correct partner for person1
         IF person1 is even THEN
-            partner ← person1 + 1
+            partner = person1 + 1
         ELSE
-            partner ← person1 - 1
+            partner = person1 - 1
         END IF
 
         // Check if person2 is not the correct partner
         IF person2 ≠ partner THEN
             // Find the index of the correct partner
-            partnerIndex ← positions[partner]
+            partnerIndex = positions[partner]
             
             // Swap person2 with the correct partner
             SWAP row[i + 1] WITH row[partnerIndex]
             
             // Update positions after the swap
-            positions[row[i + 1]] ← i + 1
-            positions[row[partnerIndex]] ← partnerIndex
+            positions[row[i + 1]] = i + 1
+            positions[row[partnerIndex]] = partnerIndex
             
             // Increment swap count
-            swaps ← swaps + 1
+            swaps = swaps + 1
         END IF
     END FOR
 
@@ -45,4 +44,4 @@ FUNCTION minSwapsCouples(row, size)
     PRINT newline
 
     RETURN swaps
-END FUNCTION
+END OF FUNCTION
