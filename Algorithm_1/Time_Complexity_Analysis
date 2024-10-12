@@ -59,9 +59,10 @@ Overall Time Complexity: O(n)
 - The algorithm maintains linear time complexity even in the worst case.
 - It's efficient as each swap optimally positions two elements.
 
-Space Complexity: O(1)
-- The positions array uses O(1) extra space (fixed size of 30).
+Space Complexity: O(n) 
+- The positions array uses O(1) extra space (max size of 30).
 - This allows for O(1) lookups, crucial for the algorithm's efficiency.
+- The issue is row size can vary leading to a space complexity of O(n).
 
 Optimality:
 - This algorithm achieves the minimum possible number of swaps.
