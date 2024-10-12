@@ -1,0 +1,84 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int minSwapsCouples(int row[], int size) {
+    int swaps = 0;
+    int positions[100];  // Array to store the positions of each person (adjust size if necessary)
+
+    // Display the original row arrangement
+    cout << "Original Row: ";
+    for (int i = 0; i < size; ++i) {
+        cout << row[i] << " ";
+    }
+    cout << endl;
+    
+    // Store the positions of each person
+    for (int i = 0; i < size; ++i) {
+        positions[row[i]] = i;
+    }
+
+    // Iterate through each couple
+    for (int i = 0; i < size; i += 2) {
+        int person1 = row[i];
+        int person2 = row[i + 1];
+
+        // Find the partner of person1
+        int partner = (person1 % 2 == 0) ? person1 + 1 : person1 - 1;
+
+        // If the partner is not adjacent, swap them
+        if (person2 != partner) {
+            // Find the index of the partner
+            int partnerIndex = positions[partner];
+
+            // Perform the swap in the row
+            swap(row[i + 1], row[partnerIndex]);
+
+            // Update positions after the swap
+            positions[row[i + 1]] = i + 1;
+            positions[row[partnerIndex]] = partnerIndex;
+
+            // Increment swap count
+            swaps++;
+        }
+    }
+
+    // Display the new row arrangement
+    cout << "Rearranged Row: ";
+    for (int i = 0; i < size; ++i) {
+        cout << row[i] << " ";
+    }
+    cout << endl;
+
+    return swaps;
+}
+
+// Main function for testing
+int main() {
+    int returnVal = 0;
+
+    // Test case 1
+    int row1[] = {0, 2, 1, 3};
+    int size1 = sizeof(row1) / sizeof(row1[0]);
+    returnVal = minSwapsCouples(row1, size1);
+    cout << "Test case 1 min swaps: " << returnVal << endl << endl;
+
+    // Test case 2
+    int row2[] = {3, 2, 0, 1};
+    int size2 = sizeof(row2) / sizeof(row2[0]);
+    returnVal = minSwapsCouples(row2, size2);
+    cout << "Test case 2 min swaps: " << returnVal << endl << endl;
+
+    // Test case 3
+    int row3[] = {3, 0, 2, 1, 4, 7, 5, 6};  
+    int size3 = sizeof(row3) / sizeof(row3[0]);
+    returnVal = minSwapsCouples(row3, size3);
+    cout << "Test case 3 min swaps: " << returnVal << endl << endl;
+
+    // Test case 4
+    int row4[] = {0, 9, 2, 7, 4, 5, 6, 1, 8, 3};  
+    int size4 = sizeof(row4) / sizeof(row4[0]);
+    returnVal = minSwapsCouples(row4, size4);
+    cout << "Test case 4 min swaps: " << returnVal << endl << endl;
+    return 0;
+}
